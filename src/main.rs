@@ -12,12 +12,9 @@ pub struct AlphanumericWithSpace;
 
 impl Distribution<char> for AlphanumericWithSpace {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> char {
-        // Define the character set including letters, numbers, and space
-        let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+        let chars = "!@#$%^&*()_+-=[]{}\\|\"\':;/?>.<,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
         let chars_len = chars.len();
-        // Create a uniform distribution over the range of indices of the chars string
         let index_distribution_result: Result<Uniform<usize>, _> = Uniform::new(0, chars_len);
-        // Handle the Result
         let index_distribution = match index_distribution_result {
             Ok(dist) => dist,
             Err(err) => panic!("Failed to create Uniform distribution: {:?}", err),
@@ -37,7 +34,7 @@ fn main() -> std::io::Result<()> {
 
     let (width, height) = terminal::size().unwrap();
 
-    let text = String::from("");
+    let text = String::from("Hello, World! This is a test of the emergency broadcast system. This is only a test.");
 
     let og_vec = text.bytes().collect::<Vec<u8>>();
     let mut s_vec = vec![0;og_vec.len()];
@@ -83,7 +80,7 @@ fn main() -> std::io::Result<()> {
             Print(format!("{rend_text}\n"))
         ).unwrap();
 
-        std::thread::sleep(std::time::Duration::from_millis(100));
+        std::thread::sleep(std::time::Duration::from_millis(50));
     }
 
     execute!(
