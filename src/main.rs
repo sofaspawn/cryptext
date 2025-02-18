@@ -28,15 +28,16 @@ impl Distribution<char> for AlphanumericWithSpace {
 
 
 fn main() -> std::io::Result<()> {
+    let args = std::env::args().collect::<Vec<_>>();
     let start = std::time::Instant::now();
 
     execute!(stdout(), cursor::Hide).unwrap();
-
     execute!(stdout(), terminal::Clear(terminal::ClearType::All)).unwrap();
 
     let (width, height) = terminal::size().unwrap();
 
-    let text = String::from("Hello, World! This is a test of the emergency broadcast system. This is only a test.");
+    //let text = String::from("Random Cypher, Text.");
+    let text = args[1].clone();
 
     let og_vec = text.bytes().collect::<Vec<u8>>();
     let mut s_vec = vec![0;og_vec.len()];
