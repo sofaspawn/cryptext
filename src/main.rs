@@ -28,6 +28,8 @@ impl Distribution<char> for AlphanumericWithSpace {
 
 
 fn main() -> std::io::Result<()> {
+    let start = std::time::Instant::now();
+
     execute!(stdout(), cursor::Hide).unwrap();
 
     execute!(stdout(), terminal::Clear(terminal::ClearType::All)).unwrap();
@@ -80,8 +82,17 @@ fn main() -> std::io::Result<()> {
             Print(format!("{rend_text}\n"))
         ).unwrap();
 
-        std::thread::sleep(std::time::Duration::from_millis(50));
+        std::thread::sleep(std::time::Duration::from_millis(90));
     }
+
+    let time_elapsed = (std::time::Instant::now() - start).as_secs_f32();
+    let elapsed_time_format = format!("Time Elapsed: {time_elapsed} seconds");
+
+    execute!(
+        stdout(),
+        MoveTo((width-elapsed_time_format.len() as u16)/2, height-4),
+        Print(elapsed_time_format)
+    ).unwrap();
 
     execute!(
         stdout(),
