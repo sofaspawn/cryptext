@@ -37,7 +37,7 @@ fn main() -> std::io::Result<()> {
 
     let (width, height) = terminal::size().unwrap();
 
-    let text = String::from("Long ass text that is made for the sole purpose of aesthetics");
+    let text = String::from("");
 
     let og_vec = text.bytes().collect::<Vec<u8>>();
     let mut s_vec = vec![0;og_vec.len()];
