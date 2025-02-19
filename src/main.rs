@@ -26,7 +26,6 @@ impl Distribution<char> for AlphanumericWithSpace {
     }
 }
 
-
 fn main() -> std::io::Result<()> {
     let args = std::env::args().collect::<Vec<_>>();
     let start = std::time::Instant::now();
